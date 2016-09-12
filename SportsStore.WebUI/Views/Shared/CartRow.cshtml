@@ -1,0 +1,21 @@
+﻿@model SportsStore.Domain.Models.CartLine
+
+@using (Html.BeginForm("RemoveFromCart", "Cart"))
+{
+    <tr>
+        @*<td>@Html.TextBox("quantity", item.Quantity, new { @type = "number", @min = "0", @step = "1", @class = "input-mini quantity" })</td>*@
+        @Html.Hidden("id", Model.Product.Id)
+        <td>@Model.Product.ProductName</td>
+        <td>@Model.Quantity</td>
+        <td class="text-right">@(Model.Product.Price.ToString("c"))</td>
+        <td class="text-right">@((Model.Product.Price * Model.Quantity).ToString("c"))</td>
+        <td class="text-right top">
+            <button type="submit" class="btn-icon-remove">
+                <i class="btn btn-sm glyphicon glyphicon-remove"></i>
+            </button>
+        </td>
+    </tr>
+}
+
+<script type="text/javascript">
+</script>

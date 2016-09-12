@@ -1,0 +1,42 @@
+﻿@model SportsStore.Domain.Models.Product
+
+<div class="product">
+    <div class="product-title">@Model.ProductName</div>
+    <div class="image">
+        <a href="#"><img src="~/Content/DesktopPicture.jpg" alt="" class="img-rounded"></a>
+    </div>
+    <div class="price">Price: @Model.Price.ToString("c")</div>
+    <div class="product-details">@Model.Details</div>
+    @using (Html.BeginForm("AddToCart", "Cart"))
+    {
+        <div>
+            @Html.HiddenFor(p => p.Id)
+            @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+            
+            <a href="#itemModal_@Model.Id" class="to-cart" data-toggle="modal">Add to Cart</a>
+
+            <div id="itemModal_@Model.Id" class="modal fade item-modal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close closeModal" data-dissmiss="modal" aria-hidden="true">x</button>
+                            <h4 class="modal-title">Specify the quantity</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="setQuantity">
+                                <label class="label control-label">
+                                    Quantity
+                                    @Html.TextBox("quantity", 1, new { @class = "quantity", @type = "number", @min = "1", @step = "1" })
+                                </label>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-primary" value="Add" />
+                            <button type="button" class="btn btn-default closeModal" modal-name="itemModal_@Model.Id" data-dissmiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

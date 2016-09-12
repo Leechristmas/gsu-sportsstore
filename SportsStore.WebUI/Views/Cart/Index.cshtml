@@ -1,0 +1,48 @@
+﻿@model SportsStore.WebUI.Models.CartIndexViewModel
+
+<div class="action-title">Your cart:</div>
+
+@if (Model.Cart.Lines?.Count() == 0)
+{
+    <div class="action-title"><h4>Your cart is empty.</h4></div>
+    @Html.RouteLink("Back", new
+    {
+    controller = "Product",
+    action = "List"
+    }, new { @class = "btn btn-primary btn-lg pull-right" })
+}
+else
+{
+    <div class="cart-body">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th class="text-right">Price</th>
+                    <th class="text-right">Subtotal</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Cart.Lines)
+                {
+                    @Html.Partial("CartRow", item);
+                }
+            </tbody>
+
+        </table>
+
+        <a class="btn btn-primary btn-lg pull-right" href="@Model.ReturnUrl">Continue shopping</a>
+
+        @Html.RouteLink("To Paying", new
+       {
+           controller = "Cart",
+           action = "OrderView"
+       },
+            new { @class = "btn btn-warning btn-lg pull-right" })
+
+    </div>
+}
+
+

@@ -1,0 +1,44 @@
+﻿@model SportsStore.Domain.Models.Cart
+
+<div class="action-title success">The order was registered</div>
+
+<table class="table table-hover table">
+    <thead>
+        <tr>
+            <th>Item</th>
+            <th>Details</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in Model.Lines.Select(p => p.Product.Category.Name))
+        {
+            <tr style="font-weight: bold">
+                <td colspan="5">@category</td>
+            </tr>
+            foreach (var item in Model.Lines.Where(p => p.Product.Category.Name == category))
+            {
+                <tr>
+                    <td>@item.Product.ProductName</td>
+                    <td>@item.Product.Details</td>
+                    <td>@item.Quantity</td>
+                    <td>@(item.Product.Price.ToString("c")).</td>
+                    <td>@((item.Product.Price * item.Quantity).ToString("c"))</td>
+                </tr>
+            }
+        }
+        <tr>
+            <td colspan="5"><div class="divider"></div></td>
+        </tr>
+        <tr>
+            <td colspan="5" class="text-right">Total: @(Model.Lines.Sum(p => p.Product.Price * p.Quantity).ToString("c"))</td>
+        </tr>
+    </tbody>    
+</table>
+@Html.RouteLink("Back", new
+{
+    controller = "Product",
+    action = "List"
+},  new { @class = "btn btn-primary btn-lg pull-right" })

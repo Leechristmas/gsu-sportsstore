@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <script src="~/Scripts/jquery-3.1.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/scripts/additional.js"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />    
+</head>
+<body>
+    <header class="navbar navbar-fixed-top">
+        <a class="navbar-brand" id="#title-link" href="#">SPORTS STORE</a>
+        <div class="btn-group pull-right bth-header-group">
+            @using (Html.BeginForm("List", "Product"))
+            {
+                <div id="search">
+                        <div id="search-form">
+                            @Html.Hidden("page", 1)
+                            @Html.Hidden("category", null)
+                            @Html.TextBox("searchItem", "", new { @type = "text", @placeholder = "Search..." })
+                            <input type="submit" value=""/>
+                        </div>
+                </div>            
+            }      
+            @*<a href="#" class="btn btn-default btn-header">Sign up</a>
+            <a href="#" class="btn btn-default btn-header">Log in</a>*@      
+        </div>
+    </header>
+
+    <div class="row">
+        <div class="categories col-xs-3 navbar-fixed-top">
+            @Html.Action("Menu", "Nav")
+        </div>
+
+        <div class="container body-content col-xs-12">
+            @RenderBody()
+        </div>
+    </div>
+
+    
+    
+    <footer class="bottom">
+        <p>&copy; @DateTime.Now.Year - Shevchuk (GSU - IBA)</p>
+    </footer>
+
+</body>
+</html>
