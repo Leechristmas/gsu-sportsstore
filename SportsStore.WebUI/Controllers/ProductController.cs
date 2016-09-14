@@ -17,7 +17,7 @@ namespace SportsStore.WebUI.Controllers
         /// <summary>
         /// Count of the products in the page
         /// </summary>
-        public int PageSize = 8;
+        public int PageSize = 12;
 
         public ProductController()
         {

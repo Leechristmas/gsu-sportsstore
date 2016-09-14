@@ -31,22 +31,38 @@ namespace SportsStore.WebUI.Controllers
 
             repository.Categories.ToList().ForEach(p =>
             {
-                categories.Add(new SelectListItem() {Text = p.Name});
+                categories.Add(new SelectListItem() {Text = p.Name, Selected = product?.CategoryId == p.Id});
             });
 
             return View(new ProductViewModel() {Product = product, Categories = categories} );
         }
 
         [HttpPost]
-        public ActionResult Edit(string productName, string details, decimal price, string category)
+        public ActionResult Edit(int? id, string productName, string details, decimal price, string category)
         {
             Product product = null;
             if (ModelState.IsValid)
             {
-               product = new Product();
+                product = repository.Products.FirstOrDefault(p => p.Id == id);
+                Category selectedCategory = repository.Categories.FirstOrDefault(c => c.Name == category);
 
-                repository.SaveProduct(product);
-                TempData["message"] = $"{product.ProductName} has been saved";
+                if (selectedCategory == null)
+                {
+                    TempData["message"] = $"\"{category}\" category was not found!";
+                    return RedirectToAction("Index");
+                }
+                if (product != null)
+                {
+                    product.ProductName = productName;
+                    product.Details = details;
+                    product.Price = price;
+                    product.CategoryId = selectedCategory.Id.Value; 
+
+                    repository.SaveProduct(product);
+                    TempData["message"] = $"{product.ProductName} has been saved";
+                }
+
+                TempData["message"] = $"Failed! The Product was not found!";
                 return RedirectToAction("Index");
             }
             else

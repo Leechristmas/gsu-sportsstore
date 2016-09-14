@@ -198,6 +198,10 @@ textarea {
     padding-top: 50px;
 }
 
+.pager a {
+    color: #000000;
+}
+
 .categories {
     margin-top: 60px;
     float: left;
@@ -293,3 +297,4 @@ textarea {
 .cart-body .btn {
     margin: 5px;
 }
+
