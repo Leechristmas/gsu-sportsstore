@@ -27,6 +27,7 @@ namespace SportsStore.WebUI.Controllers
         public ViewResult Edit(int? id)
         {
             Product product = repository.Products.FirstOrDefault(p => p.Id == id);
+
             List<SelectListItem> categories = new  List<SelectListItem>();
 
             repository.Categories.ToList().ForEach(p =>
@@ -37,13 +38,22 @@ namespace SportsStore.WebUI.Controllers
             return View(new ProductViewModel() {Product = product, Categories = categories} );
         }
 
+        public ViewResult Delete(int? id)
+        {
+            //TODO: check by id
+
+            repository.RemoveProduct(id.Value);
+
+            return View("Index", repository.Products);
+        }
+
         [HttpPost]
         public ActionResult Edit(int? id, string productName, string details, decimal price, string category)
         {
-            Product product = null;
+            Product product = repository.Products.FirstOrDefault(p => p.Id == id); ;
             if (ModelState.IsValid)
             {
-                product = repository.Products.FirstOrDefault(p => p.Id == id);
+                //edit product
                 Category selectedCategory = repository.Categories.FirstOrDefault(c => c.Name == category);
 
                 if (selectedCategory == null)
@@ -51,24 +61,31 @@ namespace SportsStore.WebUI.Controllers
                     TempData["message"] = $"\"{category}\" category was not found!";
                     return RedirectToAction("Index");
                 }
-                if (product != null)
-                {
-                    product.ProductName = productName;
-                    product.Details = details;
-                    product.Price = price;
-                    product.CategoryId = selectedCategory.Id.Value; 
 
-                    repository.SaveProduct(product);
-                    TempData["message"] = $"{product.ProductName} has been saved";
-                }
+                if(product == null) product = new Product();
 
-                TempData["message"] = $"Failed! The Product was not found!";
-                return RedirectToAction("Index");
+                product.ProductName = productName;
+                product.Details = details;
+                product.Price = price;
+                product.CategoryId = selectedCategory.Id.Value;
+
+                repository.SaveProduct(product);
+                TempData["message"] = $"{product.ProductName} has been saved";
             }
-            else
+            return RedirectToAction("Index");
+        }
+
+        public PartialViewResult Actions(string action = null)
+        {
+            ViewBag.SelectedAction = action;
+
+            IEnumerable<string> actions = new List<string>()
             {
-                return View(product);
-            }
+                "Product Management",
+                "Statistic"
+            };
+
+            return PartialView(actions);
         }
 
     }

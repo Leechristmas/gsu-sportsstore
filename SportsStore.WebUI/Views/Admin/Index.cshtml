@@ -6,10 +6,10 @@
 
 <h2>Products</h2>
 
-<p>@Html.ActionLink("Create new", "Create")</p>
+<p><a href="@Url.Action("Edit")" class="btn btn-default"><span class="glyphicon glyphicon-plus-sign sign" aria-hidden="true"></span> Create new</a></p>
 
 
-<table class="table table-hover table-striped">
+<table class="table table-hover table-striped admin-product-list">
     <thead>
     <tr>
         <th>#</th>
@@ -29,10 +29,27 @@
             <td>@item.Price.ToString("c")</td>
             <td>@item.Category.Name</td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
-                @Html.ActionLink("Details", "Details", new {id = item.Id}) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                <a href="@Url.Action("Edit", new {id = item.Id})" class="btn btn-warning"><span class="glyphicon glyphicon-edit sign" aria-hidden="true"></span>Edit</a>
 
+                <a href="#submit-removing_@item.Id" class="btn btn-danger" data-toggle="modal"><span class="glyphicon glyphicon-remove sign" aria-hidden="true"></span>Delete</a>
+
+                <div id="submit-removing_@item.Id" class="modal fade remove-modal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close closeModal" modal-name="submit-removing_@item.Id" data-dissmiss="modal" aria-hidden="true">x</button>
+                                <h4 class="modal-title">Confirmation of the deleting</h4>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure?
+                            </div>
+                            <div class="modal-footer">
+                                <a href="@Url.Action("Delete", new {id = item.Id})" class="btn btn-primary">Yes</a>
+                                <button type="button" class="btn btn-default closeModal" modal-name="submit-removing_@item.Id" data-dissmiss="modal">No</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </td>
         </tr>
     }

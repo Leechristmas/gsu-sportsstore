@@ -1,0 +1,15 @@
+﻿@model System.Collections.Generic.IEnumerable<string>
+
+@*@foreach (var act in @Model)
+{
+    @Html.RouteLink(act, new
+{
+    controller = "Admin",
+    action = "Index",
+    
+},
+    new
+    {
+        @class = "btn btn-block btn-default btn-lg category" + (cat.Name == ViewBag.SelectedCategory ? " category-selected" : "")
+    })
+}*@

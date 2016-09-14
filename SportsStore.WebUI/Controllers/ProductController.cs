@@ -31,19 +31,21 @@ namespace SportsStore.WebUI.Controllers
             IEnumerable<Product> products = repository.Products;
             ViewBag.SearchQuery = searchItem;
 
-            if (searchItem != null) products = products.Where(p => p.ProductName.IndexOf(searchItem) >= 0 || (new Regex(searchItem).Matches(p.Details).Count > 0));
+            if (searchItem != null) products = products.Where(p => p.ProductName.IndexOf(searchItem, StringComparison.Ordinal) >= 0 || (new Regex(searchItem).Matches(p.Details).Count > 0));
 
             if (currentCategory == null)
                 products = products
                     .OrderBy(p => p.Id)
                     .Skip((page - 1) * PageSize)
-                    .Take(PageSize);
+                    .Take(PageSize)
+                    .ToList();
             else
                 products = products
                     .Where(p => p.Category.Name == category)
                     .OrderBy(p => p.Id)
                     .Skip((page - 1) * PageSize)
-                    .Take(PageSize);
+                    .Take(PageSize)
+                    .ToList();
             
             return View(new ProductsListViewModel()
             {
@@ -52,7 +54,7 @@ namespace SportsStore.WebUI.Controllers
                 {
                     CurrentPage = page,
                     ItemsPerPage = PageSize,
-                    TotalItems = category == null ? repository.Products.Count() : products.Where(i => i.Category.Name == category).Count()
+                    TotalItems = category == null ? repository.Products.Count() : products.Count(i => i.Category.Name == category)
                 },
                 Categories = repository.Categories,
                 CurrentCategory = currentCategory

@@ -7,14 +7,27 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <script src="~/Scripts/jquery-3.1.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/scripts/additional.js"></script>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
-    <link href="~/Content/ErrorStyles.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet"/>
+    <link href="~/Content/Site.css" rel="stylesheet"/>
     <title></title>
 </head>
 <body>
-    <div>
-        @RenderBody()
+    <header class="navbar navbar-fixed-top admin-header">
+        <div id="admin-header-title">Admin: </div>
+    </header>
+
+    <div class="row">
+        @*<div class="categories col-xs-3 navbar-fixed-top">
+                @Html.Action("Actions", "Admin")
+            </div>*@
+
+        <div class="container body-content admin-body col-xs-12">
+            @RenderBody()
+        </div>
     </div>
 </body>
 </html>

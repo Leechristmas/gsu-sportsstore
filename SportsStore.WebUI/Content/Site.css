@@ -34,7 +34,7 @@ a {
     outline: none;
 }
 
-a:focus, a:link {
+.product-list a:focus, .product-list a:link {
     color: #fff;
 }
 
@@ -198,9 +198,9 @@ textarea {
     padding-top: 50px;
 }
 
-.pager a {
+/*.pager a {
     color: #000000;
-}
+}*/
 
 .categories {
     margin-top: 60px;
@@ -273,7 +273,7 @@ textarea {
 }
 
 .user-info input{
-    margin: 10px, 0;
+    margin: 10px 0;
 }
 
 .setQuantity {
@@ -298,3 +298,27 @@ textarea {
     margin: 5px;
 }
 
+#admin-header-title {
+    color: #fff;
+    font-size: 16pt;
+    padding-top: 10px;
+    padding-left: 20px;
+}
+
+.admin-header {
+    background: #000000;
+}
+
+.admin-body a {
+    color: #000000;
+}
+
+.table thead {
+    background: #000000;
+    /*background: #808080;*/
+    color: #fff;
+}
+
+.sign {
+    padding-top: 5px;
+}
