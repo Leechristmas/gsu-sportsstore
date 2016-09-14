@@ -6,3 +6,4 @@ bin/
 Bin/
 obj/
 Obj/
+.vs/config/applicationhost.config
