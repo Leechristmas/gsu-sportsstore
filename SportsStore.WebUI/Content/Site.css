@@ -137,6 +137,7 @@ textarea {
 .product .image img{
     max-height: 200px;
     max-width: 200px;
+    width: 100%;
     -moz-transition: all 0.5s ease-out;
     -o-transition: all 0.5s ease-out;
     -webkit-transition: all 0.5s ease-out;
@@ -313,7 +314,14 @@ textarea {
     color: #000000;
 }
 
-.table thead {
+.admin-body {
+    padding-left: 0;
+    padding-top: 60px; 
+    padding-right: 30px;
+    min-height: 600px;
+}
+
+.admin-product-list.table thead {
     background: #000000;
     /*background: #808080;*/
     color: #fff;
@@ -321,4 +329,18 @@ textarea {
 
 .sign {
     padding-top: 5px;
+}
+
+.product-edit-img {
+    margin-top: 20px;
+}
+
+.cart-summary {
+    color: #fff;
+}
+
+.cart-summary a{
+    color: #000000 !important;
+    margin-top: 10px;
+    margin-left: 10px; 
 }

@@ -112,6 +112,11 @@ namespace SportsStore.WebUI.Controllers
             return View("OrderSuccess", cart);
         }
 
+        public PartialViewResult Summary()
+        {
+            return PartialView("CartSummary", GetCart());
+        }
+
         /// <summary>
         /// Returns session cart
         /// </summary>

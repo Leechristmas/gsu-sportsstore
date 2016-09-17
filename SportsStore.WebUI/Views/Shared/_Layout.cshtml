@@ -14,9 +14,7 @@
 <body>
     <header class="navbar navbar-fixed-top">
         <a class="navbar-brand" id="#title-link" href="#">SPORTS STORE</a>
-        <div class="btn-group">
-            <a href="@Url.Action("Index", "Cart")" class="cart-ref"></a>
-        </div>
+        @Html.Action("Summary", "Cart")
         <div class="btn-group pull-right bth-header-group">
             @using (Html.BeginForm("List", "Product"))
             {

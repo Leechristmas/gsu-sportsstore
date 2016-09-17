@@ -49,7 +49,7 @@ namespace SportsStore.WebUI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(int? id, string productName, string details, decimal price, string category)
+        public ActionResult Edit(int? id, string productName, string details, decimal price, string category, HttpPostedFileBase image = null)
         {
             Product product = repository.Products.FirstOrDefault(p => p.Id == id); ;
             if (ModelState.IsValid)
@@ -65,6 +65,12 @@ namespace SportsStore.WebUI.Controllers
 
                 if(product == null) product = new Product();
 
+                if(image != null)
+                {
+                    product.ImageMimeType = image.ContentType;
+                    product.ImageData = new byte[image.ContentLength];
+                    image.InputStream.Read(product.ImageData, 0, image.ContentLength);
+                }
                 product.ProductName = productName;
                 product.Details = details;
                 product.Price = price;
