@@ -14,15 +14,31 @@ namespace SportsStore.WebUI.Controllers
     {
         ProductRepository repository;
 
+        private int PageSize = 10;
+
         public AdminController()
         {
             repository = new ProductRepository();
         }
 
         // GET: Admin
-        public ViewResult Index()
+        public ViewResult Index(int page = 1)
         {
-            return View(repository.Products);
+            IEnumerable<Product> products = repository.Products
+                .OrderBy(p => p.Id)
+                .Skip((page - 1)*PageSize)
+                .Take(PageSize)
+                .ToList();
+
+            return View(new ProductsListViewModel() {
+                Products = products,
+                PagingInfo = new PagingInfo()
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = PageSize,
+                    TotalItems = repository.Products.Count()
+                },
+            });
         }
 
         public ViewResult Edit(int? id)

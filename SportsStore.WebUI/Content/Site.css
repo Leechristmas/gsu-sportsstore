@@ -311,7 +311,7 @@ textarea {
     background: #000000;
 }
 
-.admin-body a {
+.admin-body table a {
     color: #000000;
 }
 
@@ -349,4 +349,5 @@ textarea {
 }
 
 #admin-header-title a:hover {
-    color: #fff;
+    color: #fff;
+}
