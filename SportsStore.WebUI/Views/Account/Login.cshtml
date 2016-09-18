@@ -24,7 +24,10 @@
                 <label>Password:</label>
                 @Html.PasswordFor(m => m.Password, new {@class = "form-control"})
             </div>
-            <input type="submit" value="Log In" class="btn btn-primary"/> 
+            <button type="submit" value="Log In" class="btn btn-primary">
+                <span class="glyphicon glyphicon-log-out"></span>
+                Log in
+            </button> 
         }
     </div>
 </div>

@@ -24,15 +24,16 @@
     {
         <tr>
             <td>@item.Id</td>
-            <td class="text-left">@item.ProductName</td>
-            <td class="text-left">@item.Details</td>
+            <td class="text-left col-xs-3">@item.ProductName</td>
+            <td class="text-left col-xs-4">@item.Details</td>
             <td>@item.Price.ToString("c")</td>
             <td>@item.Category.Name</td>
             <td>
-                <a href="@Url.Action("Edit", new {id = item.Id})" class="btn btn-warning"><span class="glyphicon glyphicon-edit sign" aria-hidden="true"></span>Edit</a>
-
-                <a href="#submit-removing_@item.Id" class="btn btn-danger" data-toggle="modal"><span class="glyphicon glyphicon-remove sign" aria-hidden="true"></span>Delete</a>
-
+                <div class="btn-group">
+                    <a href="@Url.Action("Edit", new {id = item.Id})" class="btn btn-warning"><span class="glyphicon glyphicon-edit sign" aria-hidden="true"></span>Edit</a>
+                    <a href="#submit-removing_@item.Id" class="btn btn-danger" data-toggle="modal"><span class="glyphicon glyphicon-remove sign" aria-hidden="true"></span>Delete</a>
+                </div>
+                
                 <div id="submit-removing_@item.Id" class="modal fade remove-modal">
                     <div class="modal-dialog">
                         <div class="modal-content">

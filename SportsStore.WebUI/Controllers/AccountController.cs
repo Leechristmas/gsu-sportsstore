@@ -39,5 +39,12 @@ namespace SportsStore.WebUI.Controllers
             }
             return View();
         }
+
+        public RedirectToRouteResult Logout()
+        {
+            authProvider.SignOut();
+
+            return RedirectToAction("Login", "Account");
+        }
     }
 }
